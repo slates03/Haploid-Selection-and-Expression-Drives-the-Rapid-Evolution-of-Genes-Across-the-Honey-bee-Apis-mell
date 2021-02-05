@@ -108,6 +108,24 @@ done
 kallisto quant -i transcripts.idx -o $TP1 -b 100 $fq2 $fq1
 ```
 
+
+### Full Analysis in R - Outline
+```
+# 1. Remove Contamination
+# 2. Set up data
+# 3. Larval RNASeq + Contrasts
+# 4. Adult RNASeq  + Contrasts
+# 5. Produce Gene Lists
+# 6. Graphical Representation-Tissue
+# 7. Statistics
+# 8. Proportion DOS 
+# 9. dNdS Alternative Dataset 
+# 10.Funtional Analysis
+```
+- R functions are in the file HaploidSelection_Final_Functions.R
+- Full R code is in the file HaploidSelection_Final.R
+
+
 ## Differential Gene Expression (DEG) DESeq
 ###Requirements
 
@@ -245,17 +263,5 @@ contrast = function(type,x,y) {
 
 lar_dvq<-contrast_up("Sex","drone","queen")
 ```
-### Full Analysis in R - Outline
-```
-# 1. Remove Contamination
-# 2. Set up data
-# 3. Larval RNASeq + Contrasts
-# 4. Adult RNASeq  + Contrasts
-# 5. Produce Gene Lists
-# 6. Graphical Representation-Tissue
-# 7. Statistics
-# 8. Proportion DOS 
-# 9. dNdS Alternative Dataset 
-# 10.Funtional Analysis
 
 ```
