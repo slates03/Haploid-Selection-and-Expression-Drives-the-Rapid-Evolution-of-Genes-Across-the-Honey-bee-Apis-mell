@@ -109,7 +109,7 @@ kallisto quant -i transcripts.idx -o $TP1 -b 100 $fq2 $fq1
 ```
 
 
-### Full Analysis in R - Outline
+## Full Analysis in R - Outline
 ```
 # 1. Remove Contamination
 # 2. Set up data
@@ -125,9 +125,8 @@ kallisto quant -i transcripts.idx -o $TP1 -b 100 $fq2 $fq1
 - R functions are in the file HaploidSelection_Final_Functions.R
 - Full R code is in the file HaploidSelection_Final.R
 
-
 ## Differential Gene Expression (DEG) DESeq
-###Requirements
+### Requirements
 
 ```
 #Install Bioconductor/tximport
