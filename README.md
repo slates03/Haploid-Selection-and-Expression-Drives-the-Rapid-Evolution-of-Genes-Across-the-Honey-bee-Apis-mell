@@ -1,5 +1,4 @@
-# Haploid Selection Protocol
-## RNAseq
+# RNAseq
 
 The RNAseq library was prepared using the Illumina TruSeq stranded mRNA sample preparation kit according to the manufacturer’s guidelines. Poly-A containing RNA was purified from total RNA using poly-T oligo attached magnetic beads after which mRNA will be fragmented and reverse transcribed to first strand cDNA using random primers. The cDNA fragments will be ligated to adapters and purified cDNA libraries enriched with PCR. All sequencing was performed using Illumina HiSeq 2500 sequencing technology producing 150-bp length paired-end reads.
 
@@ -16,29 +15,21 @@ sbatch /scratch/snyder/s/slater20/Shells/trimmomatic.sh "$k"
 done 
 
 ```
-#!/bin/sh
-# FILENAME: trimmer
-#PBS -q lenders
-#PBS -l nodes=1:ppn=1
-#PBS -l walltime=24:00:00
-#PBS -l naccesspolicy=singleuser
+#!/bin/bash
+#FILENAME: Slater_HB_RNAseq
+#SBATCH -A lenders
+#SBATCH -n 1
+#SBATCH -t 75:00:00
 
 # load the modules
-module load bioinfo
-module load trimmomatic
+	module load bioinfo
+	module load trimmomatic
 
-# specify commands
-
-cd $PBS_O_WORKDIR
-pwd
-date +"%d%B%Y%H:%M:%S"
-
-echo " "
 
 k=$1
 pidlist_sampe=""
-endfq="_1.fastq.gz"
-endfq2="_2.fastq.gz"
+endfq="_R1_001.fastq.gz"
+endfq2="_R2_001.fastq.gz"
 endTP="_1_TP.fastq.gz"
 endTP2="_2_TP.fastq.gz"
 endTU="_1_TU.fastq.gz"
@@ -52,9 +43,9 @@ TU2=$k$endTU2
 trimmomatic PE -threads 9 -phred33 $fq1 $fq2 $TP1 $TU1 $TP2 $TU2 \
 ILLUMINACLIP:/depot/bioinfo/apps/apps/trimmomatic-0.36/adapters/TruSeq3-PE.fa:2:30:10:2:keepBothReads \
 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36
-
 echo " "
 ```
+
 
 ## Kallisto
 Build Index File
@@ -80,32 +71,25 @@ done
 
 ```
 #!/bin/sh
-	# FILENAME: bwa
-	#PBS -q lenders
-	#PBS -l nodes=1:ppn=1
-	#PBS -l walltime=24:00:00
-	#PBS -l naccesspolicy=singleuser
-  
-	module load bioinfo
-	module load kallisto
+#FILENAME: kallisto DGE
+#SBATCH -A lenders
+#SBATCH -n 1
+#SBATCH -t 75:00:00
 
-	# specify commands
+module load bioinfo
+module load kallisto
 
-	cd $PBS_O_WORKDIR
-	pwd
-	date +"%d%B%Y%H:%M:%S"
+k=$1
+pidlist_sampe=""
+endfq="_TP.fastq.gz"
+endTP="output_"
+fq1=$k$endfq
+TP1=$endTP$k
 
-	echo " "
-	k=$1
-	pidlist_sampe=""
-	endfq="_R2_001_TAligned.sortedByCoord.out.fastq.gz"
-	endfq2="_R1_001_TAligned.sortedByCoord.out.fastq.gz"
-	endTP="output_"
-	fq1=$k$endfq
-	fq2=$k$endfq2
-	TP1=$endTP$k
+kallisto quant -i varroa.idx -o $TP1 --single -l 200 -s 20 $fq1
 
-kallisto quant -i transcripts.idx -o $TP1 -b 100 $fq2 $fq1
+
+echo " "
 ```
 
 
