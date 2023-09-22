@@ -1,3 +1,6 @@
+# Publication
+Slater, G. P., Dapper, A. L., & Harpur, B. A. (2022). Haploid and sexual selection shape the rate of evolution of genes across the Honey bee (Apis mellifera L.) genome. Genome Biology and Evolution, 14(6), evac063.
+
 # RNAseq
 
 The RNAseq library was prepared using the Illumina TruSeq stranded mRNA sample preparation kit according to the manufacturer’s guidelines. Poly-A containing RNA was purified from total RNA using poly-T oligo attached magnetic beads after which mRNA will be fragmented and reverse transcribed to first strand cDNA using random primers. The cDNA fragments will be ligated to adapters and purified cDNA libraries enriched with PCR. All sequencing was performed using Illumina HiSeq 2500 sequencing technology producing 150-bp length paired-end reads.
